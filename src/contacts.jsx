@@ -1,13 +1,11 @@
-import React from 'react'
-
-export default function Contacts() {
+export default function Contacts({ index, name, email, phone, onDelete }) {
   return (
-    <li class="contact">
+    <li className="contact">
       <div>
-        <span class="name">Juan Perez</span>
-        <span class="details">juan@example.com - 123-456-7890</span>
+        <span className="name">{name}</span>
+        <span className="details">{`${email}  ${phone}`}</span>
       </div>
-      <button>del</button>
+      <button onClick={() => onDelete(index)}>del</button>
     </li>
   )
 }

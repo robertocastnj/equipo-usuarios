@@ -13,7 +13,6 @@ export default function App() {
         }
         const data = await response.json()
         setContacts(data)
-        console.log(contacts)
       } catch (error) {
         console.error(error)
       }
@@ -22,14 +21,28 @@ export default function App() {
     fetchContacts()
   }, [])
 
+  const handleDelete = (indexToDelete) => {
+    const updatedContacts = [...contacts]
+    updatedContacts.splice(indexToDelete, 1)
+    setContacts(updatedContacts)
+  }
+
   return (
-    <div class="container">
+    <div className="container">
       <h1>Lista de Contactos</h1>
-      <ul class="contact-list">
-        <Contacts />
-        <Contacts />
+      <ul className="contact-list">
+        {contacts.map((contact, index) => (
+          <Contacts
+            key={index}
+            index={index}
+            name={contact.name}
+            email={contact.email}
+            phone={contact.phone}
+            onDelete={handleDelete}
+          />
+        ))}
       </ul>
-      <button id="addContactBtn" class="addContactBtn">
+      <button id="addContactBtn" className="addContactBtn">
         +
       </button>
     </div>
